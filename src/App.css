@@ -1,0 +1,45 @@
+#root {
+  min-height: 100vh;
+  max-width: 420px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.container-wrapper, .user-container-wrapper{
+  background-color: #f1f7ff;
+}
+
+.wrapper{
+  background-color: white;
+  padding-inline: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.summaries-container, .userDetails-container{
+  /* padding-inline: 0.5rem; */
+  min-height: 80vh;
+}
+
+.summary{
+  border-radius: 6px;
+}
+
+.clip{
+  clip-path: ellipse(55% 50% at 50% 20%);
+}
+.clip2{
+  clip-path: ellipse(65% 55% at 50% 15%);
+}
+
+.privacy-screen {
+  max-width: 420px;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:#5bbfb8;
+  z-index: 2;
+}
+

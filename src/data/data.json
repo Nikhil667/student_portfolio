@@ -1,0 +1,41 @@
+[
+    {
+      "contact_id": "1001",
+      "status": "completed",
+      "error_message": "",
+      "result": {
+          "short_description": "A novel recycling solution aimed at reducing waste and promoting sustainability.",
+          "long_description": "This innovative recycling solution focuses on utilizing advanced technology to sort and process waste materials more efficiently. By integrating machine learning algorithms, it can accurately identify and segregate recyclables from non-recyclables, thus reducing contamination rates. The system is designed to be user-friendly and scalable, making it suitable for both residential and industrial applications. Its implementation could lead to a significant decrease in landfill usage and a boost in material recovery rates, contributing to a more sustainable and eco-friendly environment.",
+          "idea_title": "Innovative Recycling Solution",
+          "generated_image_link": "https://example.com/generated-image1.png",
+          "category": "Environment",
+          "sub_category": "Recycling"
+      }
+  },
+  {
+      "contact_id": "1002",
+      "status": "completed",
+      "error_message": "",
+      "result": {
+          "short_description": "Advanced techniques to conserve water through innovative methods and technologies.",
+          "long_description": "The advanced water conservation techniques proposed in this idea aim to tackle the growing issue of water scarcity by employing a variety of innovative methods. These include the use of smart irrigation systems that monitor soil moisture and weather conditions to optimize water usage, as well as the implementation of greywater recycling systems in households and industries. Additionally, public awareness campaigns and educational programs will be conducted to promote water-saving practices. The adoption of these techniques can lead to substantial water savings and contribute to the sustainability of water resources.",
+          "idea_title": "Advanced Water Conservation Techniques",
+          "generated_image_link": "https://example.com/generated-image2.png",
+          "category": "Environment",
+          "sub_category": "Water Conservation"
+      }
+  },
+  {
+      "contact_id": "1003",
+      "status": "completed",
+      "error_message": "",
+      "result": {
+          "short_description": "Integrating AI to enhance healthcare services and improve patient outcomes.",
+          "long_description": "This idea explores the integration of artificial intelligence in the healthcare sector to revolutionize patient care and administrative processes. AI can be utilized for predictive analytics to identify potential health risks early on, thus enabling preventive measures. Additionally, AI-powered diagnostic tools can assist doctors in accurately diagnosing diseases and conditions. The use of AI in administrative tasks such as scheduling and patient records management can streamline operations and reduce the burden on healthcare professionals. Overall, AI integration has the potential to enhance the quality of healthcare services and improve patient outcomes.",
+          "idea_title": "AI Integration in Healthcare",
+          "generated_image_link": "https://example.com/generated-image3.png",
+          "category": "Technology",
+          "sub_category": "Healthcare"
+      }
+  }
+  ]
