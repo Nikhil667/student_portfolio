@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Summary from "../components/Summary";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
+
+import fetchData from "../services/fetchSummaryData";
 
 //import { useSummaryData } from "../hooks/useSummaryData";
 
 import { useSummaryData } from "../context/SummaryContext";
 
 import { motion, useIsPresent } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import Search from "../components/Search";
 
 export const slideIn = {
   initial: {
@@ -32,15 +36,15 @@ export const slideIn = {
 };
 
 export default function HomePage() {
-
   const isPresent = useIsPresent();
 
-  const { summaryData } = useSummaryData();
+  const { summaryData, show} = useSummaryData();
 
-  console.log(summaryData)
+  
+  console.log(summaryData);
 
   return (
-    <div className="container-wrapper">
+    <div className="container-wrapper ">
       <motion.div
         initial={{ scaleX: 1 }}
         animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
@@ -49,50 +53,61 @@ export default function HomePage() {
         className="privacy-screen"
       />
 
-      <Header title={"Summary Board"} bgColor={"bg-teal-900"} textColor={"text-white"}/>
+      <Header
+        title={"Summary Board"}
+        bgColor={"bg-teal-900"}
+        textColor={"text-white"}
+      />
 
-      <Navbar />
+      {/* <Navbar /> */}
 
-      {summaryData.length === 0 ? 
-      
-      <section className="summaries-container flex items-start justify-center pt-16">
-        <h2 className="text-xl font-semibold">Loading Summaries...</h2>
-      </section> 
-      
-      : 
+      <div className="wrapper py-5 rounded-md flex flex-col gap-4">
+      <Search/>
 
-      <section className="summaries-container">
-        {summaryData.map((summary, i) => (
-          <motion.div
-            key={`summary_${i}`}
-            custom={i}
-            variants={slideIn}
-            animate="enter"
-            exit="exit"
-            initial="initial"
-          >
-            {/* previous data structure */}
-            {/* <Summary
+      </div>
+
+
+      { show === false  &&
+
+      <div>
+        {summaryData.length === 0 ? (
+          <section className="summaries-container flex items-start justify-center pt-16">
+            <h2 className="text-xl font-semibold">Loading Summaries...</h2>
+          </section>
+        ) : (
+          <section className="summaries-container">
+            {summaryData.map((summary, i) => (
+              <motion.div
+                key={`summary_${i}`}
+                custom={i}
+                variants={slideIn}
+                animate="enter"
+                exit="exit"
+                initial="initial"
+              >
+                {/* previous data structure */}
+                {/* <Summary
               key={summary.contact_id}
               id={summary.contact_id}
               title={summary.result.idea_title}
               content={summary.result.long_description}
             /> */}
-            <Summary
-              key={summary.id}
-              id={summary.id}
-              title={summary.idea_title}
-              content={summary.long_description}
-              user_name={summary.contact_name}
-              generated_image={summary.generated_image_link}
-              likes={summary.likes}
-              time={summary.timestamp}
-            />
-          </motion.div>
-        ))}
-      </section>
-
-}
+                <Summary
+                  key={summary.id}
+                  id={summary.id}
+                  title={summary.idea_title}
+                  content={summary.long_description}
+                  user_name={summary.contact_name}
+                  generated_image={summary.generated_image_link}
+                  likes={summary.likes}
+                  time={summary.timestamp}
+                />
+              </motion.div>
+            ))}
+          </section>
+        )}
+      </div>
+    }
 
       <footer className="p-6 border-t-2 bg-white border-gray-300">
         <h2>Udhyam Learning Foundation</h2>

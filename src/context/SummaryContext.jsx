@@ -15,18 +15,24 @@ export function SummaryDataProvider({ children }) {
 
     const [summaryData, setSummaryData] = useState([])
 
+    const [show, setShow] = useState(false)
+
+    const fetchDataAsync = async () => {
+      try {
+        const result = await fetchData();
+        setSummaryData(result)
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
     useEffect(() => {
-      const fetchDataAsync = async () => {
-        try {
-          const result = await fetchData();
-          setSummaryData(result)
-        } catch (error) {
-          console.log(error)
-        }
-      };
-  
       fetchDataAsync();
     }, []);
+
+    function handleSetShow(){
+      setShow((prev) => !prev)
+    }
     
 
   //   useEffect(() => {
@@ -72,17 +78,20 @@ export function SummaryDataProvider({ children }) {
 
 //     }
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        //setSummaryData(newdata.data);
-        //console.log(newdata.data)
-        // console.log(data)
+    //     //setSummaryData(newdata.data);
+    //     //console.log(newdata.data)
+    //     // console.log(data)
 
-    }, [])
+    // }, [])
     
 
     const contextValue = {
-        summaryData
+        summaryData,
+        fetchDataAsync,
+        show,
+        handleSetShow
     };
 
 return (

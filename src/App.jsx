@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, useLocation, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
@@ -11,6 +11,7 @@ function AnimatedRoutes() {
   useLayoutEffect(() => {
     document.documentElement.scrollTo({ top:0, left:0, behavior: "instant" });
 }, [location.pathname]);
+
 
   return (
     <AnimatePresence mode="wait" initial="false">

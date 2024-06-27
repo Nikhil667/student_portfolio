@@ -1,8 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import heart from "/icons/Heart.svg";
 import heart_filled from "/icons/Heart-filled.svg";
 import ConfettiExplosion from "react-confetti-explosion";
 import axios from "axios";
+import fetchData from "../services/fetchSummaryData";
+import { useSummaryData } from "../context/SummaryContext";
+
+const getLikesFromLocalStorage = () => {
+  const likes = localStorage.getItem('likes');
+  return likes ? JSON.parse(likes) : {};
+};
+
+const saveLikeToLocalStorage = (summaryId) => {
+  const likes = getLikesFromLocalStorage();
+  likes[summaryId] = true;
+  localStorage.setItem('likes', JSON.stringify(likes));
+};
+
+const removeLikeFromLocalStorage = (summaryId) => {
+  const likes = getLikesFromLocalStorage();
+  delete likes[summaryId];
+  localStorage.setItem('likes', JSON.stringify(likes));
+};
 
 const likeSummary = async (id) => {
   try {
@@ -14,6 +33,9 @@ const likeSummary = async (id) => {
     };
 
     const response = await axios.post(apiUrl, postData);
+    console.log("first")
+    
+    //window.location.reload();
     console.log(response);
   } catch (error) {
     console.error("POST Error:", error);
@@ -31,12 +53,30 @@ const dislikeSummary = async (id) => {
     };
 
     const response = await axios.post(apiUrl, postData);
+
     console.log(response);
   } catch (error) {
     console.error("POST Error:", error);
     throw error;
   }
 };
+
+// const fetchSummaryLikes = async (summaryId) => {
+//   try {
+//     const apiUrl = 'https://us-central1-udhyam-tech.cloudfunctions.net/cloud_sql_api';
+//     const postData = {
+//       "flow_id" : "0",
+//       "query" : "SELECT a.*,b.contact_name FROM student_portfolio.summaries a left join student_portfolio.users b on a.contact_id = b.contact_id where approved = 1"
+//   };
+
+//     const response = await axios.post(apiUrl, postData);
+    
+//     console.log(response.data.data.filter(el => el.id === summaryId))
+//   } catch (error) {
+//     console.error("GET Error:", error);
+//     throw error;
+//   }
+// };
 
 export default function SummaryFooter({
   summaryLikes,
@@ -47,6 +87,8 @@ export default function SummaryFooter({
   const [isExploding, setIsExploding] = useState(false);
   const [likeCount, setLikeCount] = useState(summaryLikes);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { fetchDataAsync } = useSummaryData()
 
   // const handleLike = () => {
   //   if (!isClick) {
@@ -70,18 +112,60 @@ export default function SummaryFooter({
   //   setIsExploding(prevExploding => !prevExploding);
   // };
 
+  // const handleLike = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     if (!isClick) {
+  //       await likeSummary(summaryId);
+  //       setLikeCount((prevCount) => prevCount + 1);
+  //     } else {
+  //       await dislikeSummary(summaryId);
+  //       setLikeCount((prevCount) => prevCount - 1);
+  //     }
+  //     setClick(!isClick);
+  //     setIsExploding(!isExploding);
+  //   } catch (error) {
+  //     console.error("Error handling like:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    const likes = getLikesFromLocalStorage();
+    if (likes[summaryId]) {
+      setClick(true);
+    }
+    
+  }, [summaryId]);
+
+  // useEffect(() => {
+  //   const updateLikes = async () => {
+  //     const updatedLikes = await fetchSummaryLikes(summaryId);
+  //     setLikeCount(updatedLikes);
+  //   };
+
+  //   updateLikes();
+  // }, [summaryId]);
+
+
   const handleLike = async () => {
     setIsLoading(true);
     try {
       if (!isClick) {
         await likeSummary(summaryId);
+        saveLikeToLocalStorage(summaryId);
         setLikeCount((prevCount) => prevCount + 1);
+        setIsExploding(true); 
+        fetchDataAsync();
       } else {
         await dislikeSummary(summaryId);
+        removeLikeFromLocalStorage(summaryId);
         setLikeCount((prevCount) => prevCount - 1);
+        setIsExploding(false);
+        fetchDataAsync();
       }
-      setClick((prevClick) => !prevClick);
-      setIsExploding((prevExploding) => !prevExploding);
+      setClick(!isClick);
     } catch (error) {
       console.error("Error handling like:", error);
     } finally {

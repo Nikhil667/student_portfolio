@@ -9,7 +9,7 @@ export default function Navbar() {
           
           {/* <Nav/> */}
 
-          <Search/>
+          
           
         </div>
       </div>
