@@ -89,11 +89,9 @@ export default function ProjectDetail() {
                 />
               </Link>
               <div className="project-detail-link cursor-pointer">
-                <Link to="/">
-                  <div className="py-2 px-4 flex border-2 border-teal-600 rounded-full items-center">
-                    <p className="text-teal-700 text-sm font-medium">Profile</p>
-                    <img src={arrow} alt="arrow" className="max-w-6 max-h-4" />
-                  </div>
+                <Link to="/" className="py-2 px-4 rounded-full bg-gray-100 flex items-center gap-1">
+                    <p className="text-black font-semibold text-lg">Profile</p>
+                    <img src={arrow} alt="arrow" className="" />
                 </Link>
               </div>
             </section>
