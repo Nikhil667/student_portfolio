@@ -22,8 +22,6 @@ export default function Search() {
     setFilteredSummaries(summaryData)
     console.log("usee")
   }, [summaryData])
-  
-
 
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
@@ -58,8 +56,6 @@ export default function Search() {
       { show === true  &&
 
         <div className="overlay-screen-container h-screen relative">
-
-        
 
             <button className="absolute right-0 py-2 px-4 rounded-full bg-gray-100 flex items-center gap-1" onClick={() => handleSetShow()} > <img src={close} alt="close" /><span className="text-black font-semibold text-lg">Close</span></button>
             <div className="mt-16">

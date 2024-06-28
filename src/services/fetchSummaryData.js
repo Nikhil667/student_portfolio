@@ -5,7 +5,7 @@ const fetchData = async () => {
     const apiUrl = 'https://us-central1-udhyam-tech.cloudfunctions.net/cloud_sql_api';
     const postData = {
       "flow_id" : "0",
-      "query" : "SELECT a.*,b.contact_name FROM student_portfolio.summaries a left join student_portfolio.users b on a.contact_id = b.contact_id where approved = 1"
+      "query" : "SELECT a.*,b.contact_name,b.school_name,b.team_name,b.team_id FROM student_portfolio.summaries a left join student_portfolio.users b on a.contact_id = b.contact_id where approved = 1"
   };
 
     const response = await axios.post(apiUrl, postData);

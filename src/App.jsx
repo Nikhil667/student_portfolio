@@ -4,6 +4,7 @@ import { BrowserRouter as Router, useLocation, Routes, Route } from "react-route
 import HomePage from "./Pages/HomePage";
 import ProjectDetail from "./Pages/ProjectDetail";
 import { AnimatePresence, motion } from "framer-motion";
+import Profile from "./Pages/Profile";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -39,6 +40,19 @@ function AnimatedRoutes() {
             //   transition={{ duration: 0.5 }}
             // >
               <ProjectDetail />
+            // </motion.div>
+          }
+        />
+        <Route
+          path="/profile/:id"
+          element={
+            // <motion.div
+            //   initial={{ opacity: 0 }}
+            //   animate={{ opacity: 1 }}
+            //   exit={{ opacity: 0 }}
+            //   transition={{ duration: 0.5 }}
+            // >
+              <Profile />
             // </motion.div>
           }
         />

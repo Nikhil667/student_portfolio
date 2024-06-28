@@ -11,7 +11,6 @@ import { motion, useIsPresent } from "framer-motion";
 import video from "/3mb-video.mp4";
 import arrow from "/icons/ArrowDownRight.svg";
 import ReactPlayer from 'react-player/lazy'
-import { useState } from "react";
 
 export const slideIn = {
   initial: {
@@ -35,14 +34,12 @@ export const slideIn = {
   },
 };
 
-export default function ProjectDetail() {
+export default function Profile() {
   let { id } = useParams();
 
   const { summaryData } = useSummaryData();
 
-  const [summaryDataState, setSummaryDataState] = useState(summaryData)
-
-  let filterDataOfLevel = summaryDataState.filter(
+  let filterDataOfLevel = summaryData.filter(
     (item) => Number(item.id) === Number(id)
   );
 
@@ -66,7 +63,7 @@ export default function ProjectDetail() {
           className="privacy-screen"
         />
         <Header
-          title={"Product Portfolio"}
+          title={"Profile"}
           bgColor={"bg-teal-900"}
           textColor={"text-white"}
         />
@@ -84,7 +81,7 @@ export default function ProjectDetail() {
           >
             {/* <button className="ms-6 mt-2 px-4 py-2 text-xl font-bold rounded-full aspect-square  bg-gray-200">{"<"}</button> */}
 
-            <section className="profileNavigationContainer p-6 flex justify-between items-center bg-white">
+            {/* <section className="profileNavigationContainer p-6 flex justify-between items-center bg-white">
               <Link to="/">
                 <img
                   className="bg-gray-100 p-2 rounded-full"
@@ -92,28 +89,32 @@ export default function ProjectDetail() {
                   alt="back-button"
                 />
               </Link>
-              <div className="project-detail-link cursor-pointer">
-                <Link  to={`/profile/${filterDataOfLevel[0].id}`} className="py-2 px-4 rounded-full bg-gray-100 flex items-center gap-1">
-                    <p className="text-black font-semibold text-lg">Profile</p>
-                    <img src={arrow} alt="arrow" className="" />
-                </Link>
-              </div>
-            </section>
+              
+            </section> */}
 
-            <section className="user-details-section flex items-center gap-4 px-6 rounded-lg relative bg-white">
+            <section className="user-details-section flex items-center flex-col gap-4 px-6 rounded-lg relative bg-white pt-8">
               {/* <div className="profile-image w-[112px] h-[112px] rounded-full bg-black border-4 border-white"> */}
-              {/* <div className="bg-blue-600 absolute h-[50%] w-full top-0 z-10 clip"></div>
-            <div className="bg-blue-400 absolute h-[63%] w-full top-0 z-0 clip2"></div> */}
+              {/* <Link to="/">
+                <img
+                  className="bg-gray-100 p-2 rounded-full absolute z-20 left-0"
+                  src={backButton}
+                  alt="back-button"
+                />
+              </Link> */}
+              <div className="bg-teal-900 absolute h-[50%] w-full top-0 z-10 clip"></div>
+            <div className="bg-teal-600 absolute h-[63%] w-full top-0 z-0 clip2"></div>
               {/* <div className="bg-white rounded-lg absolute h-[60%] w-full bottom-0 z-10"></div> */}
 
-              <button className="profile-image w-[200px] h-[200px] rounded-lg z-20 cursor-pointer">
+              
+
+              <button className="profile-image w-[140px] h-[140px] rounded-lg z-20 cursor-pointer">
                 <img
                   className="rounded-lg border-4 border-white"
                   src={filterDataOfLevel[0]?.generated_image_link}
                   alt="avatar"
                 />
               </button>
-              <div className="user-headings flex flex-col ">
+              <div className="user-headings flex flex-col  items-center">
              
                 <h2 className="font-bold text-2xl text-black">
                   {filterDataOfLevel[0]?.idea_title}
@@ -125,53 +126,7 @@ export default function ProjectDetail() {
             </section>
 
             <div className="userDetails-container pb-2">
-              {/* <div className="wrapper"> */}
-
-              {/* <div className="summary mb-2 relative bg-white">
               
-            </div> */}
-              {/* </div> */}
-              <div className="wrapper summary py-6">
-                <section className="summary-detail-section ">
-                  <div className="user-headings flex flex-col">
-                    {/* <div className="flex gap-2 items-center mb-2">
-                <img src={Board} alt="board icon" />
-                <h2 className="font-bold text-base ">Short summary about my project</h2>
-              </div> */}
-                    <h2 className="font-bold text-lg mb-3">
-                      {/* <h2 className="font-bold text-lg mb-3 border-l-4 border-blue-600 pl-2"> */}
-                      Short summary about project
-                    </h2>
-                    <p className="author font-medium text-base text-[#222]">
-                      {/* <p className="author font-medium text-base text-[#222] p-4 rounded-lg bg-blue-50"> */}
-                      {filterDataOfLevel[0]?.long_description}
-                    </p>
-                  </div>
-                </section>
-              </div>
-              <div className="wrapper summary py-6">
-                <section className="user-submitted-video-section">
-                  <div className="user-submitted-video-container">
-                    <h2 className="font-bold text-lg mb-3">
-                      {/* <h2 className="font-bold text-lg mb-3 border-l-4 border-blue-600 pl-2"> */}
-                      Submitted Video
-                    </h2>
-                     {/* Lazy load the YouTube player */}
-                    <ReactPlayer 
-                    controls
-                    width='100%'
-                     url={filterDataOfLevel[0]?.video_link} />
-                    {/* <video
-                      src={video}
-                      type="video/mp4"
-                      controls
-                      className="aspect-video"
-                    ></video> */}
-                    {/* <video src={video} type="video/mp4" controls className="aspect-auto p-4 bg-blue-50 rounded-lg"></video> */}
-                  </div>
-                </section>
-              </div>
-
               <div className="wrapper summary py-6">
                 <section className="user-badges-section">
                   <div className="user-badges-container">
